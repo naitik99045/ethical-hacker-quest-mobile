@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -30,10 +31,10 @@ const LearningModules = () => {
     isOpen: false,
     module: null
   });
-  const [purchasedModules, setPurchasedModules] = useState<Set<number>>(new Set([1, 2])); // Free modules
+  const [purchasedModules, setPurchasedModules] = useState<Set<number>>(new Set([1, 2, 3, 4, 5, 6])); // First 6 modules are free
 
   const modules: Module[] = [
-    // Free Fundamentals
+    // FREE MODULES (1-6)
     {
       id: 1,
       title: "Introduction to Ethical Hacking",
@@ -60,161 +61,154 @@ const LearningModules = () => {
       icon: Code,
       category: 'fundamentals'
     },
-    
-    // Premium Techniques
     {
       id: 3,
-      title: "Network Reconnaissance",
-      description: "Learn information gathering and network scanning techniques",
+      title: "Cybersecurity Fundamentals",
+      description: "Understanding core cybersecurity concepts and terminology",
+      difficulty: "Beginner",
+      duration: "2.5 hours",
+      lessons: 10,
+      completed: false,
+      locked: false,
+      topics: ["CIA Triad", "Risk Assessment", "Threats & Vulnerabilities", "Security Controls"],
+      icon: Shield,
+      category: 'fundamentals'
+    },
+    {
+      id: 4,
+      title: "Information Gathering Basics",
+      description: "Learn passive reconnaissance and OSINT techniques",
+      difficulty: "Beginner",
+      duration: "3 hours",
+      lessons: 12,
+      completed: false,
+      locked: false,
+      topics: ["Google Dorking", "WHOIS", "DNS Enumeration", "Social Media OSINT"],
+      icon: Search,
+      category: 'fundamentals'
+    },
+    {
+      id: 5,
+      title: "Network Fundamentals",
+      description: "Understanding network protocols and basic networking concepts",
+      difficulty: "Beginner",
+      duration: "3.5 hours",
+      lessons: 14,
+      completed: false,
+      locked: false,
+      topics: ["TCP/IP", "OSI Model", "Network Devices", "Subnetting"],
+      icon: Globe,
+      category: 'fundamentals'
+    },
+    {
+      id: 6,
+      title: "Basic Vulnerability Assessment",
+      description: "Introduction to identifying common security vulnerabilities",
+      difficulty: "Beginner",
+      duration: "3 hours",
+      lessons: 11,
+      completed: false,
+      locked: false,
+      topics: ["Vulnerability Types", "CVE Database", "Basic Scanning", "Risk Scoring"],
+      icon: Bug,
+      category: 'fundamentals'
+    },
+    
+    // PREMIUM MODULES (7-12)
+    // 2 Techniques modules
+    {
+      id: 7,
+      title: "Advanced Network Reconnaissance",
+      description: "Master advanced information gathering and network scanning techniques",
       difficulty: "Intermediate",
       duration: "4 hours",
       lessons: 15,
       completed: false,
       locked: false,
-      topics: ["Nmap", "Netdiscover", "Port Scanning", "Service Enumeration"],
+      topics: ["Nmap Advanced", "Netdiscover", "Masscan", "Service Enumeration"],
       icon: Search,
       category: 'techniques',
       isPremium: true,
-      price: 299
+      price: 15
     },
     {
-      id: 4,
-      title: "Web Application Security",
-      description: "Discover vulnerabilities in web applications",
+      id: 8,
+      title: "Web Application Security Testing",
+      description: "Discover and exploit vulnerabilities in web applications",
       difficulty: "Intermediate",
       duration: "5 hours",
       lessons: 18,
       completed: false,
       locked: false,
-      topics: ["SQL Injection", "XSS", "CSRF", "Directory Traversal"],
+      topics: ["SQL Injection", "XSS", "CSRF", "Directory Traversal", "OWASP Top 10"],
       icon: Globe,
       category: 'techniques',
       isPremium: true,
-      price: 399
-    },
-    {
-      id: 5,
-      title: "Vulnerability Assessment",
-      description: "Learn to identify and assess security vulnerabilities",
-      difficulty: "Intermediate",
-      duration: "4 hours",
-      lessons: 16,
-      completed: false,
-      locked: false,
-      topics: ["OpenVAS", "Nessus", "Vulnerability Databases", "Risk Assessment"],
-      icon: Bug,
-      category: 'techniques',
-      isPremium: true,
-      price: 349
+      price: 50
     },
     
-    // Premium Advanced Tools
+    // 1 Tools module
     {
-      id: 6,
-      title: "Wireless Security",
-      description: "Understand wireless network security and attack methods",
-      difficulty: "Advanced",
-      duration: "4 hours",
-      lessons: 14,
-      completed: false,
-      locked: false,
-      topics: ["WEP/WPA", "Aircrack-ng", "Evil Twin", "Deauth Attacks"],
-      icon: Wifi,
-      category: 'specialization',
-      isPremium: true,
-      price: 499
-    },
-    {
-      id: 7,
-      title: "Metasploit Framework",
+      id: 9,
+      title: "Metasploit Framework Mastery",
       description: "Master the world's most popular penetration testing framework",
       difficulty: "Advanced",
       duration: "6 hours",
       lessons: 20,
       completed: false,
       locked: false,
-      topics: ["Msfconsole", "Payloads", "Encoders", "Post-Exploitation"],
+      topics: ["Msfconsole", "Payloads", "Encoders", "Post-Exploitation", "Custom Modules"],
       icon: Code,
       category: 'tools',
       isPremium: true,
-      price: 599
-    },
-    {
-      id: 8,
-      title: "Cryptography & Password Security",
-      description: "Learn about encryption, hashing, and password cracking",
-      difficulty: "Advanced",
-      duration: "5 hours",
-      lessons: 17,
-      completed: false,
-      locked: false,
-      topics: ["Hash Cracking", "John the Ripper", "Hashcat", "Rainbow Tables"],
-      icon: Key,
-      category: 'specialization',
-      isPremium: true,
-      price: 449
+      price: 100
     },
     
-    // Premium Expert Level
-    {
-      id: 9,
-      title: "Social Engineering",
-      description: "Understand psychological manipulation techniques in cybersecurity",
-      difficulty: "Expert",
-      duration: "3 hours",
-      lessons: 12,
-      completed: false,
-      locked: false,
-      topics: ["Phishing", "Pretexting", "Physical Security", "OSINT"],
-      icon: Shield,
-      category: 'specialization',
-      isPremium: true,
-      price: 699
-    },
+    // 3 Specialization modules
     {
       id: 10,
-      title: "Digital Forensics",
-      description: "Learn to investigate and analyze digital evidence",
+      title: "Wireless Network Security",
+      description: "Advanced wireless network security and attack methodologies",
+      difficulty: "Advanced",
+      duration: "4 hours",
+      lessons: 14,
+      completed: false,
+      locked: false,
+      topics: ["WEP/WPA Cracking", "Aircrack-ng Suite", "Evil Twin Attacks", "Bluetooth Hacking"],
+      icon: Wifi,
+      category: 'specialization',
+      isPremium: true,
+      price: 120
+    },
+    {
+      id: 11,
+      title: "Digital Forensics & Incident Response",
+      description: "Learn to investigate and analyze digital evidence professionally",
       difficulty: "Expert",
       duration: "6 hours",
       lessons: 22,
       completed: false,
       locked: false,
-      topics: ["File Recovery", "Memory Analysis", "Network Forensics", "Mobile Forensics"],
+      topics: ["File Recovery", "Memory Analysis", "Network Forensics", "Chain of Custody"],
       icon: Search,
       category: 'specialization',
       isPremium: true,
-      price: 799
+      price: 150
     },
     {
-      id: 11,
-      title: "Advanced Persistent Threats",
-      description: "Study sophisticated attack campaigns and defense strategies",
+      id: 12,
+      title: "Advanced Persistent Threats & Malware",
+      description: "Study sophisticated attack campaigns and advanced malware analysis",
       difficulty: "Expert",
       duration: "7 hours",
       lessons: 25,
       completed: false,
       locked: false,
-      topics: ["APT Tactics", "Threat Hunting", "Incident Response", "Malware Analysis"],
+      topics: ["APT Tactics", "Malware Reverse Engineering", "Threat Hunting", "Attribution"],
       icon: Bug,
       category: 'specialization',
       isPremium: true,
-      price: 899
-    },
-    {
-      id: 12,
-      title: "Database Security",
-      description: "Master database penetration testing and security assessment",
-      difficulty: "Advanced",
-      duration: "4 hours",
-      lessons: 16,
-      completed: false,
-      locked: false,
-      topics: ["SQL Server", "MySQL", "Oracle", "NoSQL Security"],
-      icon: Database,
-      category: 'techniques',
-      isPremium: true,
-      price: 549
+      price: 200
     }
   ];
 
@@ -283,7 +277,7 @@ const LearningModules = () => {
           Learning Modules
         </h2>
         <p className="text-green-300">
-          Master ethical hacking through structured lessons and hands-on practice
+          Master ethical hacking through structured lessons - Start with 6 free fundamentals!
         </p>
       </div>
 
@@ -343,28 +337,26 @@ const LearningModules = () => {
         </CardContent>
       </Card>
 
-      {/* Learning Path Recommendations */}
+      {/* Learning Path Information */}
       <Card className="border-green-500/30">
         <CardHeader>
-          <CardTitle className="text-green-400 terminal-font">Recommended Learning Path</CardTitle>
+          <CardTitle className="text-green-400 terminal-font">Learning Path</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="space-y-2 text-sm">
-            <div className="flex items-center text-green-300">
-              <span className="w-6 h-6 bg-green-600 text-black rounded-full flex items-center justify-center mr-3 text-xs font-bold">1</span>
-              Start with <span className="text-green-400 mx-1 font-semibold">Fundamentals</span> - Free modules to build your foundation
+          <div className="space-y-3">
+            <div className="bg-green-400/10 border border-green-500/30 p-3 rounded">
+              <div className="flex items-center text-green-300 mb-2">
+                <span className="w-6 h-6 bg-green-600 text-black rounded-full flex items-center justify-center mr-3 text-xs font-bold">FREE</span>
+                <span className="font-semibold">Fundamentals (Modules 1-6)</span>
+              </div>
+              <p className="text-sm text-green-300 ml-9">Build your foundation with essential ethical hacking concepts - completely free!</p>
             </div>
-            <div className="flex items-center text-green-300">
-              <span className="w-6 h-6 bg-yellow-600 text-black rounded-full flex items-center justify-center mr-3 text-xs font-bold">2</span>
-              Learn <span className="text-green-400 mx-1 font-semibold">Techniques</span> - Premium modules for advanced skills
-            </div>
-            <div className="flex items-center text-green-300">
-              <span className="w-6 h-6 bg-orange-600 text-white rounded-full flex items-center justify-center mr-3 text-xs font-bold">3</span>
-              Master <span className="text-green-400 mx-1 font-semibold">Tools</span> - Professional-grade frameworks
-            </div>
-            <div className="flex items-center text-green-300">
-              <span className="w-6 h-6 bg-red-600 text-white rounded-full flex items-center justify-center mr-3 text-xs font-bold">4</span>
-              Specialize in <span className="text-green-400 mx-1 font-semibold">Advanced Topics</span> - Expert-level content
+            <div className="bg-yellow-400/10 border border-yellow-500/30 p-3 rounded">
+              <div className="flex items-center text-yellow-300 mb-2">
+                <Crown className="w-5 h-5 mr-2" />
+                <span className="font-semibold">Premium Modules (₹15 - ₹200)</span>
+              </div>
+              <p className="text-sm text-yellow-300">Advanced techniques, professional tools, and specialized skills for serious practitioners</p>
             </div>
           </div>
         </CardContent>
@@ -410,9 +402,13 @@ const LearningModules = () => {
                       <Badge variant="outline" className="text-blue-400 border-blue-500 capitalize">
                         {module.category}
                       </Badge>
-                      {module.isPremium && (
+                      {module.isPremium ? (
                         <Badge className="bg-yellow-600 text-black">
                           {isPurchased ? 'PURCHASED' : `₹${module.price}`}
+                        </Badge>
+                      ) : (
+                        <Badge className="bg-green-600 text-black">
+                          FREE
                         </Badge>
                       )}
                     </div>
