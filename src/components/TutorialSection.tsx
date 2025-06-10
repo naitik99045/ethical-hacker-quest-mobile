@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Play, Book, CheckCircle, Code, Terminal } from 'lucide-react';
+import LessonContent from './LessonContent';
 
 interface Lesson {
   id: number;
@@ -13,6 +14,9 @@ interface Lesson {
   duration: string;
   completed: boolean;
   content: string;
+  commands?: string[];
+  tips?: string[];
+  objectives?: string[];
 }
 
 interface TutorialSectionProps {
@@ -24,6 +28,95 @@ const TutorialSection: React.FC<TutorialSectionProps> = ({ moduleId }) => {
   const [completedLessons, setCompletedLessons] = useState<number[]>([1, 2]);
 
   const moduleLessons: Record<number, Lesson[]> = {
+    1: [
+      {
+        id: 1,
+        title: "What is Ethical Hacking?",
+        type: "video",
+        duration: "15 min",
+        completed: true,
+        content: "Ethical hacking, also known as penetration testing or white-hat hacking, is the practice of intentionally probing systems for vulnerabilities in order to improve security.\n\nUnlike malicious hackers (black-hats), ethical hackers work with permission from system owners to identify and fix security weaknesses before they can be exploited by cybercriminals.\n\nEthical hackers follow a strict code of conduct and work within legal boundaries to help organizations protect their digital assets.",
+        objectives: [
+          "Understand the difference between ethical and malicious hacking",
+          "Learn about the legal framework surrounding penetration testing",
+          "Explore career opportunities in cybersecurity",
+          "Understand the importance of authorization and permission"
+        ],
+        tips: [
+          "Always get written permission before testing any system",
+          "Document everything you do during testing",
+          "Never access data you don't need for the test",
+          "Report vulnerabilities responsibly"
+        ]
+      },
+      {
+        id: 2,
+        title: "Types of Hackers",
+        type: "reading",
+        duration: "10 min",
+        completed: true,
+        content: "The hacking community is diverse, with different motivations and methods:\n\n**White Hat Hackers (Ethical Hackers)**\n- Work legally to improve security\n- Often employed by companies or work as consultants\n- Focus on defensive security measures\n\n**Black Hat Hackers (Malicious Hackers)**\n- Break into systems illegally for personal gain\n- Cause damage, steal data, or disrupt services\n- Face legal consequences for their actions\n\n**Gray Hat Hackers**\n- Operate in a legal gray area\n- May find vulnerabilities without permission but report them\n- Not necessarily malicious but not fully ethical either\n\n**Script Kiddies**\n- Use existing tools and scripts without understanding them\n- Often motivated by curiosity or showing off\n- Generally lack advanced technical skills\n\n**Hacktivists**\n- Use hacking skills to promote political or social causes\n- May target organizations they disagree with\n- Operate in legal gray areas",
+        objectives: [
+          "Distinguish between different types of hackers",
+          "Understand motivations behind different hacking activities",
+          "Learn about the legal implications of different approaches"
+        ]
+      },
+      {
+        id: 3,
+        title: "Legal Framework and Ethics",
+        type: "reading",
+        duration: "20 min",
+        completed: false,
+        content: "Understanding the legal landscape is crucial for ethical hackers:\n\n**Key Legislation:**\n\n**Computer Fraud and Abuse Act (CFAA) - USA**\n- Federal law that criminalizes unauthorized computer access\n- Applies to government computers, financial institutions, and interstate commerce\n- Penalties can include fines and imprisonment\n\n**General Data Protection Regulation (GDPR) - EU**\n- Protects personal data of EU citizens\n- Requires organizations to report data breaches\n- Imposes heavy fines for non-compliance\n\n**Ethical Guidelines:**\n\n1. **Authorization**: Always get explicit written permission\n2. **Scope**: Stay within the agreed-upon testing boundaries\n3. **Confidentiality**: Protect sensitive information discovered\n4. **Disclosure**: Report vulnerabilities responsibly\n5. **No Harm**: Avoid disrupting business operations\n\n**Professional Certifications:**\n- CEH (Certified Ethical Hacker)\n- CISSP (Certified Information Systems Security Professional)\n- OSCP (Offensive Security Certified Professional)\n- GPEN (GIAC Penetration Tester)",
+        objectives: [
+          "Understand key cybersecurity laws and regulations",
+          "Learn about professional ethical guidelines",
+          "Explore certification pathways in ethical hacking"
+        ]
+      }
+    ],
+    2: [
+      {
+        id: 1,
+        title: "Introduction to Linux",
+        type: "video",
+        duration: "20 min",
+        completed: false,
+        content: "Linux is the foundation of Kali Linux and most cybersecurity tools. Understanding Linux basics is essential for ethical hackers.\n\nLinux is an open-source operating system kernel that forms the basis of many distributions. It's preferred in cybersecurity because:\n\n• Open source - You can examine and modify the code\n• Stability - Runs reliably for long periods\n• Security - Built with security in mind from the ground up\n• Flexibility - Highly customizable for specific needs\n• Community - Large community of developers and users",
+        objectives: [
+          "Understand what Linux is and why it's used in cybersecurity",
+          "Learn about different Linux distributions",
+          "Understand the relationship between Linux and Kali Linux"
+        ]
+      },
+      {
+        id: 2,
+        title: "Essential Linux Commands",
+        type: "practical",
+        duration: "30 min",
+        completed: false,
+        content: "Master these fundamental Linux commands that you'll use daily in cybersecurity work:",
+        commands: [
+          "ls -la",
+          "cd /home/user",
+          "pwd",
+          "mkdir test_directory",
+          "touch newfile.txt",
+          "cp file1.txt file2.txt",
+          "mv oldname.txt newname.txt",
+          "rm unwanted_file.txt",
+          "chmod 755 script.sh",
+          "sudo apt update"
+        ],
+        objectives: [
+          "Navigate the Linux file system efficiently",
+          "Create, copy, move, and delete files and directories",
+          "Understand file permissions and how to modify them",
+          "Use sudo for administrative tasks"
+        ]
+      }
+    ],
     3: [
       {
         id: 1,
@@ -31,7 +124,12 @@ const TutorialSection: React.FC<TutorialSectionProps> = ({ moduleId }) => {
         type: "video",
         duration: "15 min",
         completed: true,
-        content: "Network reconnaissance is the process of gathering information about a target network..."
+        content: "Network reconnaissance is the first phase of ethical hacking where we gather information about target systems and networks.\n\nThis phase involves:\n• Passive reconnaissance - Gathering information without directly interacting with the target\n• Active reconnaissance - Directly probing the target system\n• Information gathering about network topology, services, and potential vulnerabilities\n\nReconnaissance is crucial because it helps us understand the attack surface and plan our testing approach.",
+        objectives: [
+          "Understand the importance of reconnaissance in ethical hacking",
+          "Differentiate between passive and active reconnaissance",
+          "Learn about information gathering techniques"
+        ]
       },
       {
         id: 2,
@@ -39,7 +137,12 @@ const TutorialSection: React.FC<TutorialSectionProps> = ({ moduleId }) => {
         type: "reading",
         duration: "10 min",
         completed: true,
-        content: "Network protocols define the rules and standards for communication between devices..."
+        content: "Network protocols are the rules that govern communication between devices on a network.\n\n**TCP/IP Stack:**\n\n**Application Layer (Layer 7)**\n- HTTP, HTTPS, FTP, SSH, DNS, SMTP\n- Where applications interact with the network\n\n**Transport Layer (Layer 4)**\n- TCP (reliable, connection-oriented)\n- UDP (unreliable, connectionless)\n- Handles data transmission between hosts\n\n**Network Layer (Layer 3)**\n- IP (Internet Protocol)\n- Handles routing between networks\n\n**Data Link Layer (Layer 2)**\n- Ethernet, Wi-Fi\n- Handles communication within a network segment\n\n**Physical Layer (Layer 1)**\n- Cables, radio waves, fiber optic\n- The actual physical transmission medium",
+        objectives: [
+          "Understand the TCP/IP protocol stack",
+          "Learn about common network protocols",
+          "Understand how data flows through network layers"
+        ]
       },
       {
         id: 3,
@@ -47,23 +150,23 @@ const TutorialSection: React.FC<TutorialSectionProps> = ({ moduleId }) => {
         type: "practical",
         duration: "20 min",
         completed: false,
-        content: "Nmap (Network Mapper) is a powerful tool for network discovery and security auditing..."
-      },
-      {
-        id: 4,
-        title: "Basic Nmap Scanning Techniques",
-        type: "video",
-        duration: "25 min",
-        completed: false,
-        content: "Learn the fundamental Nmap scanning techniques including ping scans, TCP scans, and UDP scans..."
-      },
-      {
-        id: 5,
-        title: "Advanced Nmap Features",
-        type: "practical",
-        duration: "30 min",
-        completed: false,
-        content: "Explore advanced Nmap features like script scanning, OS detection, and service enumeration..."
+        content: "Nmap (Network Mapper) is the most popular network discovery and security auditing tool. It's essential for reconnaissance.",
+        commands: [
+          "nmap --version",
+          "nmap 192.168.1.1",
+          "nmap -sn 192.168.1.0/24",
+          "nmap -p 80,443 192.168.1.1",
+          "nmap -sS 192.168.1.1",
+          "nmap -sV 192.168.1.1",
+          "nmap -O 192.168.1.1",
+          "nmap -A 192.168.1.1"
+        ],
+        objectives: [
+          "Install and verify Nmap installation",
+          "Perform basic host discovery scans",
+          "Scan specific ports and services",
+          "Use different scan types for various purposes"
+        ]
       }
     ],
     4: [
@@ -73,7 +176,12 @@ const TutorialSection: React.FC<TutorialSectionProps> = ({ moduleId }) => {
         type: "video",
         duration: "20 min",
         completed: false,
-        content: "Understanding how web applications work is crucial for identifying security vulnerabilities..."
+        content: "Understanding web application architecture is crucial for identifying security vulnerabilities.\n\n**Client-Server Model:**\n- Client (browser) sends requests\n- Server processes requests and sends responses\n- Database stores and retrieves data\n\n**Common Components:**\n- Frontend (HTML, CSS, JavaScript)\n- Backend (server-side code)\n- Database (stores application data)\n- Web server (Apache, Nginx)\n- Application server (handles business logic)\n\n**Common Vulnerabilities arise from:**\n- Insufficient input validation\n- Poor authentication mechanisms\n- Inadequate authorization controls\n- Improper error handling\n- Insecure data storage",
+        objectives: [
+          "Understand how web applications work",
+          "Learn about different application components",
+          "Identify common areas where vulnerabilities occur"
+        ]
       },
       {
         id: 2,
@@ -81,7 +189,12 @@ const TutorialSection: React.FC<TutorialSectionProps> = ({ moduleId }) => {
         type: "reading",
         duration: "15 min",
         completed: false,
-        content: "The OWASP Top 10 represents the most critical web application security risks..."
+        content: "The OWASP Top 10 represents the most critical web application security risks:\n\n**1. Broken Access Control**\n- Users can access unauthorized functionality or data\n- Example: Viewing someone else's account by changing URL parameters\n\n**2. Cryptographic Failures**\n- Sensitive data transmitted or stored without proper encryption\n- Example: Passwords stored in plain text\n\n**3. Injection**\n- Untrusted data sent to interpreters as part of commands\n- Example: SQL injection, command injection\n\n**4. Insecure Design**\n- Flaws in the application's design and architecture\n- Example: Missing security controls in the design phase\n\n**5. Security Misconfiguration**\n- Incomplete or ad-hoc configurations\n- Example: Default passwords, unnecessary features enabled\n\n**6. Vulnerable and Outdated Components**\n- Using components with known vulnerabilities\n- Example: Outdated libraries or frameworks\n\n**7. Identification and Authentication Failures**\n- Broken authentication and session management\n- Example: Weak passwords, session hijacking\n\n**8. Software and Data Integrity Failures**\n- Code and infrastructure that don't protect against integrity violations\n- Example: Using untrusted sources for updates\n\n**9. Security Logging and Monitoring Failures**\n- Insufficient logging and monitoring\n- Example: Not detecting ongoing attacks\n\n**10. Server-Side Request Forgery (SSRF)**\n- Application fetches remote resources without validating URLs\n- Example: Accessing internal services through the application",
+        objectives: [
+          "Understand the most common web application vulnerabilities",
+          "Learn how each vulnerability can be exploited",
+          "Understand the impact of these vulnerabilities"
+        ]
       },
       {
         id: 3,
@@ -89,7 +202,26 @@ const TutorialSection: React.FC<TutorialSectionProps> = ({ moduleId }) => {
         type: "practical",
         duration: "35 min",
         completed: false,
-        content: "SQL injection is one of the most common and dangerous web application vulnerabilities..."
+        content: "SQL injection occurs when user input is incorrectly filtered for string literal escape characters or user input is not strongly typed.",
+        commands: [
+          "sqlmap --version",
+          "sqlmap -u 'http://testsite.com/page.php?id=1' --dbs",
+          "sqlmap -u 'http://testsite.com/page.php?id=1' -D database_name --tables",
+          "sqlmap -u 'http://testsite.com/page.php?id=1' -D database_name -T table_name --columns",
+          "sqlmap -u 'http://testsite.com/page.php?id=1' -D database_name -T table_name --dump"
+        ],
+        objectives: [
+          "Understand how SQL injection vulnerabilities occur",
+          "Learn to identify potential injection points",
+          "Practice using SQLMap for automated testing",
+          "Understand the impact of successful SQL injection"
+        ],
+        tips: [
+          "Always test on systems you own or have permission to test",
+          "Start with manual testing before using automated tools",
+          "Understand the underlying SQL queries being executed",
+          "Learn both time-based and error-based injection techniques"
+        ]
       }
     ]
   };
@@ -130,7 +262,7 @@ const TutorialSection: React.FC<TutorialSectionProps> = ({ moduleId }) => {
   const progress = (completedLessons.length / lessons.length) * 100;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 pb-20">
       {/* Module Progress */}
       <Card className="border-green-500/30 glow-green">
         <CardHeader>
@@ -172,41 +304,8 @@ const TutorialSection: React.FC<TutorialSectionProps> = ({ moduleId }) => {
             </div>
           </CardHeader>
           <CardContent className="space-y-4">
-            {/* Video Player Simulation */}
-            {lesson.type === 'video' && (
-              <div className="bg-black rounded-lg p-8 text-center border border-green-500/30">
-                <Play className="h-16 w-16 text-green-400 mx-auto mb-4" />
-                <p className="text-green-300 terminal-font">Video Tutorial</p>
-                <p className="text-sm text-green-400">Click play to start the lesson</p>
-              </div>
-            )}
-
-            {/* Reading Content */}
-            {lesson.type === 'reading' && (
-              <div className="bg-secondary/50 p-4 rounded border border-green-500/30">
-                <Book className="h-8 w-8 text-green-400 mb-3" />
-                <p className="text-green-300 leading-relaxed">{lesson.content}</p>
-              </div>
-            )}
-
-            {/* Practical Exercise */}
-            {lesson.type === 'practical' && (
-              <div className="bg-black/50 p-4 rounded border border-green-500/30">
-                <div className="flex items-center mb-3">
-                  <Terminal className="h-6 w-6 text-green-400 mr-2" />
-                  <span className="text-green-400 terminal-font">Hands-on Exercise</span>
-                </div>
-                <p className="text-green-300 mb-4">{lesson.content}</p>
-                <div className="bg-black p-3 rounded border border-green-500/50">
-                  <p className="text-green-400 terminal-font text-sm">
-                    $ nmap -sT 192.168.1.1
-                  </p>
-                  <p className="text-green-300 text-sm mt-1">
-                    Try this command in the Terminal section!
-                  </p>
-                </div>
-              </div>
-            )}
+            {/* Lesson Content */}
+            <LessonContent lesson={lesson} />
 
             {/* Lesson Actions */}
             <div className="flex space-x-3">
