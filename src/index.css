@@ -1,45 +1,36 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Cybersecurity/Hacking themed design system */
-
 @layer base {
   :root {
-    --background: 0 0% 5%;
-    --foreground: 120 100% 85%;
-
-    --card: 0 0% 8%;
-    --card-foreground: 120 100% 85%;
-
-    --popover: 0 0% 8%;
-    --popover-foreground: 120 100% 85%;
-
-    --primary: 120 100% 50%;
-    --primary-foreground: 0 0% 5%;
-
-    --secondary: 0 0% 12%;
-    --secondary-foreground: 120 100% 85%;
-
-    --muted: 0 0% 12%;
-    --muted-foreground: 120 50% 70%;
-
-    --accent: 120 100% 40%;
-    --accent-foreground: 0 0% 5%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 120 20% 20%;
-    --input: 120 20% 15%;
-    --ring: 120 100% 50%;
-
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
     --radius: 0.5rem;
-
-    --terminal-green: 120 100% 50%;
-    --terminal-dark: 0 0% 5%;
-    --matrix-green: 120 100% 40%;
   }
 }
 
@@ -47,43 +38,155 @@
   * {
     @apply border-border;
   }
-
   body {
     @apply bg-background text-foreground;
-    font-family: 'Courier New', monospace;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+    min-height: 100vh;
   }
+}
 
+.terminal-font {
+  font-family: 'Orbitron', monospace;
+}
+
+.matrix-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.matrix-effect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    rgba(34, 197, 94, 0.05) 0%,
+    rgba(34, 197, 94, 0.1) 50%,
+    rgba(34, 197, 94, 0.05) 100%
+  );
+  animation: matrix-scan 3s ease-in-out infinite;
+}
+
+@keyframes matrix-scan {
+  0%, 100% { transform: translateX(-100%); }
+  50% { transform: translateX(100%); }
+}
+
+.matrix-char {
+  animation: matrix-fall 4s linear infinite;
+  font-family: 'Orbitron', monospace;
+}
+
+@keyframes matrix-fall {
+  0% { transform: translateY(-100vh); opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+.glow-green {
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.3);
+}
+
+.glow-yellow {
+  box-shadow: 0 0 10px rgba(234, 179, 8, 0.3);
+}
+
+.terminal-cursor::after {
+  content: '|';
+  animation: blink 1s infinite;
+  color: #22c55e;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.terminal-output {
+  font-family: 'Courier New', monospace;
+  white-space: pre-wrap;
+}
+
+.command-suggestion {
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  transition: all 0.2s ease;
+}
+
+.command-suggestion:hover {
+  background: rgba(34, 197, 94, 0.2);
+  border-color: rgba(34, 197, 94, 0.5);
+}
+
+/* Quiz Animations */
+.quiz-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.quiz-card:hover {
+  transform: translateY(-5px);
+}
+
+.quiz-option {
+  transition: all 0.2s ease;
+}
+
+.quiz-option:hover {
+  transform: translateX(5px);
+}
+
+.quiz-option.correct {
+  animation: correct-flash 0.5s ease;
+}
+
+.quiz-option.incorrect {
+  animation: incorrect-shake 0.5s ease;
+}
+
+@keyframes correct-flash {
+  0%, 100% { background-color: rgba(34, 197, 94, 0.1); }
+  50% { background-color: rgba(34, 197, 94, 0.3); }
+}
+
+@keyframes incorrect-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+/* Progress animations */
+.progress-bar {
+  transition: width 0.5s ease-in-out;
+}
+
+/* Module card animations */
+.module-card {
+  transition: all 0.3s ease;
+}
+
+.module-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Payment modal animations */
+.payment-modal {
+  animation: modal-appear 0.3s ease;
+}
+
+@keyframes modal-appear {
+  0% { opacity: 0; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* Responsive design improvements */
+@media (max-width: 768px) {
   .terminal-font {
-    font-family: 'Courier New', 'Monaco', 'Menlo', monospace;
+    font-size: 0.9rem;
   }
-
-  .matrix-effect {
-    background: linear-gradient(45deg, 
-      rgba(0, 255, 0, 0.1) 0%, 
-      rgba(0, 255, 0, 0.05) 50%, 
-      rgba(0, 255, 0, 0.1) 100%);
-  }
-
-  .glow-green {
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
-  }
-
-  .terminal-cursor::after {
-    content: '█';
-    animation: blink 1s infinite;
-  }
-
-  @keyframes blink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0; }
-  }
-
-  @keyframes matrix-rain {
-    0% { transform: translateY(-100%); opacity: 1; }
-    100% { transform: translateY(100vh); opacity: 0; }
-  }
-
+  
   .matrix-char {
-    animation: matrix-rain 3s linear infinite;
+    font-size: 0.8rem;
   }
 }
