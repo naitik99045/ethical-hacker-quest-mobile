@@ -37,11 +37,44 @@
 @layer base {
   * {
     @apply border-border;
+    /* Prevent text selection on mobile */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
+  
+  /* Allow text selection for input fields */
+  input, textarea, [contenteditable] {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+  }
+  
   body {
     @apply bg-background text-foreground;
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
     min-height: 100vh;
+    /* Prevent bounce scrolling on iOS */
+    overscroll-behavior: none;
+    /* Ensure proper touch behavior */
+    touch-action: manipulation;
+  }
+  
+  /* Mobile-specific improvements */
+  html {
+    /* Prevent zoom on double tap */
+    touch-action: manipulation;
+  }
+  
+  /* Safe area for devices with notches */
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
   }
 }
 
@@ -180,7 +213,7 @@
   100% { opacity: 1; transform: scale(1); }
 }
 
-/* Responsive design improvements */
+/* Mobile-specific responsive design improvements */
 @media (max-width: 768px) {
   .terminal-font {
     font-size: 0.9rem;
@@ -188,5 +221,31 @@
   
   .matrix-char {
     font-size: 0.8rem;
+  }
+  
+  /* Improve touch targets */
+  button, .clickable {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Better spacing on mobile */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Android-specific improvements */
+@media (max-width: 480px) {
+  /* Ensure proper keyboard behavior */
+  input:focus {
+    transform: translateZ(0);
+  }
+  
+  /* Prevent layout shift on keyboard open */
+  .fixed-bottom {
+    position: fixed;
+    bottom: 0;
   }
 }
