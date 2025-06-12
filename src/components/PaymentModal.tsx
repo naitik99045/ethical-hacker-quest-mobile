@@ -39,7 +39,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({
     { id: 'netbanking', name: 'Net Banking', icon: Building, description: 'Internet Banking' }
   ];
 
-  const merchantUpiId = '7020645145@fam';
+  const merchantUpiId = '9372893559';
   const merchantName = 'Kali Academy';
 
   const copyToClipboard = (text: string) => {

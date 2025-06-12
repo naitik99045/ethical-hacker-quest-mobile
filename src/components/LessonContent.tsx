@@ -1,8 +1,8 @@
-
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Play, Book, Terminal, Code, AlertTriangle, Shield, Wifi } from 'lucide-react';
+import VideoPlayer from './VideoPlayer';
 
 interface LessonContentProps {
   lesson: {
@@ -14,6 +14,7 @@ interface LessonContentProps {
     commands?: string[];
     tips?: string[];
     objectives?: string[];
+    videoId?: string; // YouTube video ID
   };
 }
 
@@ -33,14 +34,22 @@ const LessonContent: React.FC<LessonContentProps> = ({ lesson }) => {
       {lesson.type === 'video' && (
         <Card className="border-green-500/30">
           <CardContent className="p-6">
-            <div className="bg-black rounded-lg p-8 text-center border border-green-500/30 mb-4">
-              <Play className="h-16 w-16 text-green-400 mx-auto mb-4" />
-              <p className="text-green-300 terminal-font text-lg mb-2">Video Tutorial</p>
-              <p className="text-sm text-green-400">Duration: {lesson.duration}</p>
-            </div>
+            {lesson.videoId ? (
+              <VideoPlayer 
+                videoId={lesson.videoId}
+                title={lesson.title}
+                description={lesson.content}
+              />
+            ) : (
+              <div className="bg-black rounded-lg p-8 text-center border border-green-500/30 mb-4">
+                <Play className="h-16 w-16 text-green-400 mx-auto mb-4" />
+                <p className="text-green-300 terminal-font text-lg mb-2">Video Tutorial</p>
+                <p className="text-sm text-green-400">Duration: {lesson.duration}</p>
+              </div>
+            )}
             
             {lesson.objectives && (
-              <div className="mb-4">
+              <div className="mb-4 mt-4">
                 <h4 className="text-green-400 terminal-font font-bold mb-2">Learning Objectives:</h4>
                 <ul className="space-y-1">
                   {lesson.objectives.map((objective, index) => (
@@ -53,9 +62,11 @@ const LessonContent: React.FC<LessonContentProps> = ({ lesson }) => {
               </div>
             )}
             
-            <div className="bg-secondary/50 p-4 rounded border border-green-500/30">
-              <p className="text-green-300 leading-relaxed">{lesson.content}</p>
-            </div>
+            {!lesson.videoId && (
+              <div className="bg-secondary/50 p-4 rounded border border-green-500/30">
+                <p className="text-green-300 leading-relaxed">{lesson.content}</p>
+              </div>
+            )}
           </CardContent>
         </Card>
       )}

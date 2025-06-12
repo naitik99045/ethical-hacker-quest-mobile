@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -114,8 +113,7 @@ const LearningModules = () => {
       category: 'fundamentals'
     },
     
-    // PREMIUM MODULES (7-12)
-    // 2 Techniques modules
+    // PREMIUM MODULES WITH NEW PRICING
     {
       id: 7,
       title: "Advanced Network Reconnaissance",
@@ -129,7 +127,7 @@ const LearningModules = () => {
       icon: Search,
       category: 'techniques',
       isPremium: true,
-      price: 15
+      price: 3
     },
     {
       id: 8,
@@ -144,10 +142,10 @@ const LearningModules = () => {
       icon: Globe,
       category: 'techniques',
       isPremium: true,
-      price: 50
+      price: 3
     },
     
-    // 1 Tools module
+    // Tools module
     {
       id: 9,
       title: "Metasploit Framework Mastery",
@@ -161,10 +159,10 @@ const LearningModules = () => {
       icon: Code,
       category: 'tools',
       isPremium: true,
-      price: 100
+      price: 5
     },
     
-    // 3 Specialization modules
+    // Specialization modules - Bundle all 3 for ₹5
     {
       id: 10,
       title: "Wireless Network Security",
@@ -178,7 +176,7 @@ const LearningModules = () => {
       icon: Wifi,
       category: 'specialization',
       isPremium: true,
-      price: 120
+      price: 5
     },
     {
       id: 11,
@@ -193,7 +191,7 @@ const LearningModules = () => {
       icon: Search,
       category: 'specialization',
       isPremium: true,
-      price: 150
+      price: 5
     },
     {
       id: 12,
@@ -208,7 +206,7 @@ const LearningModules = () => {
       icon: Bug,
       category: 'specialization',
       isPremium: true,
-      price: 200
+      price: 5
     }
   ];
 
@@ -340,7 +338,7 @@ const LearningModules = () => {
       {/* Learning Path Information */}
       <Card className="border-green-500/30">
         <CardHeader>
-          <CardTitle className="text-green-400 terminal-font">Learning Path</CardTitle>
+          <CardTitle className="text-green-400 terminal-font">Learning Path & Pricing</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-3">
@@ -354,9 +352,13 @@ const LearningModules = () => {
             <div className="bg-yellow-400/10 border border-yellow-500/30 p-3 rounded">
               <div className="flex items-center text-yellow-300 mb-2">
                 <Crown className="w-5 h-5 mr-2" />
-                <span className="font-semibold">Premium Modules (₹15 - ₹200)</span>
+                <span className="font-semibold">Premium Modules</span>
               </div>
-              <p className="text-sm text-yellow-300">Advanced techniques, professional tools, and specialized skills for serious practitioners</p>
+              <div className="text-sm text-yellow-300 space-y-1">
+                <p>• Tools (Metasploit): ₹5</p>
+                <p>• Techniques (Each): ₹3</p>
+                <p>• Specialization Bundle (All 3): ₹5 total</p>
+              </div>
             </div>
           </div>
         </CardContent>
