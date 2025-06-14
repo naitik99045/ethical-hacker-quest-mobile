@@ -1,10 +1,10 @@
+
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
-import { Terminal, Book, Play, Code, LogOut } from 'lucide-react';
-import { useAuth } from '@/contexts/AuthContext';
+import { Terminal, Book, Play, Code } from 'lucide-react';
 import TerminalGame from '@/components/TerminalGame';
 import TutorialSection from '@/components/TutorialSection';
 import QuizSection from '@/components/QuizSection';
@@ -15,7 +15,6 @@ const Index = () => {
   const [userLevel, setUserLevel] = useState(1);
   const [userXP, setUserXP] = useState(250);
   const [matrixChars, setMatrixChars] = useState<Array<{id: number, char: string, left: number}>>([]);
-  const { signOut, user } = useAuth();
 
   // Matrix rain effect
   useEffect(() => {
@@ -39,10 +38,6 @@ const Index = () => {
     { id: 'terminal', label: 'Terminal', icon: Code },
     { id: 'quiz', label: 'Quiz', icon: Play }
   ];
-
-  const handleSignOut = async () => {
-    await signOut();
-  };
 
   const renderSection = () => {
     switch (activeSection) {
@@ -162,20 +157,11 @@ const Index = () => {
             </div>
             <div className="flex items-center space-x-3">
               <span className="text-green-300 text-sm">
-                Welcome, {user?.email?.split('@')[0]}
+                Welcome, Guest
               </span>
               <Badge variant="outline" className="text-green-400 border-green-500">
                 Level {userLevel}
               </Badge>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleSignOut}
-                className="border-green-500 text-green-400 hover:bg-green-400/10"
-              >
-                <LogOut className="h-4 w-4 mr-2" />
-                Logout
-              </Button>
             </div>
           </div>
         </div>
