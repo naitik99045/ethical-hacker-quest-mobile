@@ -55,6 +55,12 @@ const Auth = () => {
     },
   });
 
+  // Reset forms when switching between login and signup
+  useEffect(() => {
+    loginForm.reset();
+    signupForm.reset();
+  }, [isLogin, loginForm, signupForm]);
+
   useEffect(() => {
     if (user) {
       navigate('/');
