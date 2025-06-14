@@ -162,7 +162,7 @@ const Auth = () => {
                             {...field}
                             type="email"
                             placeholder="hacker@example.com"
-                            className="bg-background border-green-500/30 text-green-300 focus:border-green-400 focus:ring-green-400"
+                            className="bg-black/50 border-green-500/30 text-white placeholder:text-gray-400 focus:border-green-400 focus:ring-green-400"
                             autoComplete="email"
                           />
                         </FormControl>
@@ -182,7 +182,7 @@ const Auth = () => {
                               {...field}
                               type={showPassword ? "text" : "password"}
                               placeholder="••••••••"
-                              className="bg-background border-green-500/30 text-green-300 pr-10 focus:border-green-400 focus:ring-green-400"
+                              className="bg-black/50 border-green-500/30 text-white placeholder:text-gray-400 pr-10 focus:border-green-400 focus:ring-green-400"
                               autoComplete="current-password"
                             />
                             <button
@@ -221,7 +221,7 @@ const Auth = () => {
                             <Input
                               {...field}
                               placeholder="John Doe"
-                              className="bg-background border-green-500/30 text-green-300 focus:border-green-400 focus:ring-green-400"
+                              className="bg-black/50 border-green-500/30 text-white placeholder:text-gray-400 focus:border-green-400 focus:ring-green-400"
                               autoComplete="name"
                             />
                           </FormControl>
@@ -239,7 +239,7 @@ const Auth = () => {
                             <Input
                               {...field}
                               placeholder="hackerman"
-                              className="bg-background border-green-500/30 text-green-300 focus:border-green-400 focus:ring-green-400"
+                              className="bg-black/50 border-green-500/30 text-white placeholder:text-gray-400 focus:border-green-400 focus:ring-green-400"
                               autoComplete="username"
                             />
                           </FormControl>
@@ -259,7 +259,7 @@ const Auth = () => {
                             {...field}
                             type="email"
                             placeholder="hacker@example.com"
-                            className="bg-background border-green-500/30 text-green-300 focus:border-green-400 focus:ring-green-400"
+                            className="bg-black/50 border-green-500/30 text-white placeholder:text-gray-400 focus:border-green-400 focus:ring-green-400"
                             autoComplete="email"
                           />
                         </FormControl>
@@ -279,7 +279,7 @@ const Auth = () => {
                               {...field}
                               type={showPassword ? "text" : "password"}
                               placeholder="••••••••"
-                              className="bg-background border-green-500/30 text-green-300 pr-10 focus:border-green-400 focus:ring-green-400"
+                              className="bg-black/50 border-green-500/30 text-white placeholder:text-gray-400 pr-10 focus:border-green-400 focus:ring-green-400"
                               autoComplete="new-password"
                             />
                             <button
@@ -307,7 +307,7 @@ const Auth = () => {
                               {...field}
                               type={showConfirmPassword ? "text" : "password"}
                               placeholder="••••••••"
-                              className="bg-background border-green-500/30 text-green-300 pr-10 focus:border-green-400 focus:ring-green-400"
+                              className="bg-black/50 border-green-500/30 text-white placeholder:text-gray-400 pr-10 focus:border-green-400 focus:ring-green-400"
                               autoComplete="new-password"
                             />
                             <button
