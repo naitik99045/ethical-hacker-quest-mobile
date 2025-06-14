@@ -62,41 +62,57 @@ const Auth = () => {
   }, [user, navigate]);
 
   const onLogin = async (values: z.infer<typeof loginSchema>) => {
-    const { error } = await signIn(values.email, values.password);
-    
-    if (error) {
+    try {
+      const { error } = await signIn(values.email, values.password);
+      
+      if (error) {
+        toast({
+          title: "Login Failed",
+          description: error.message,
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Welcome back!",
+          description: "Successfully logged in to Kali Academy",
+        });
+        navigate('/');
+      }
+    } catch (err) {
       toast({
         title: "Login Failed",
-        description: error.message,
+        description: "An unexpected error occurred",
         variant: "destructive",
       });
-    } else {
-      toast({
-        title: "Welcome back!",
-        description: "Successfully logged in to Kali Academy",
-      });
-      navigate('/');
     }
   };
 
   const onSignup = async (values: z.infer<typeof signupSchema>) => {
-    const { error } = await signUp(values.email, values.password, {
-      full_name: values.fullName,
-      username: values.username,
-    });
-    
-    if (error) {
+    try {
+      const { error } = await signUp(values.email, values.password, {
+        full_name: values.fullName,
+        username: values.username,
+      });
+      
+      if (error) {
+        toast({
+          title: "Signup Failed",
+          description: error.message,
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Account Created!",
+          description: "Please check your email to verify your account",
+        });
+        setIsLogin(true);
+      }
+    } catch (err) {
       toast({
         title: "Signup Failed",
-        description: error.message,
+        description: "An unexpected error occurred",
         variant: "destructive",
       });
-    } else {
-      toast({
-        title: "Account Created!",
-        description: "Please check your email to verify your account",
-      });
-      setIsLogin(true);
     }
   };
 
@@ -140,7 +156,8 @@ const Auth = () => {
                             {...field}
                             type="email"
                             placeholder="hacker@example.com"
-                            className="bg-background border-green-500/30 text-green-300"
+                            className="bg-background border-green-500/30 text-green-300 focus:border-green-400 focus:ring-green-400"
+                            autoComplete="email"
                           />
                         </FormControl>
                         <FormMessage />
@@ -159,7 +176,8 @@ const Auth = () => {
                               {...field}
                               type={showPassword ? "text" : "password"}
                               placeholder="••••••••"
-                              className="bg-background border-green-500/30 text-green-300 pr-10"
+                              className="bg-background border-green-500/30 text-green-300 pr-10 focus:border-green-400 focus:ring-green-400"
+                              autoComplete="current-password"
                             />
                             <button
                               type="button"
@@ -177,8 +195,9 @@ const Auth = () => {
                   <Button 
                     type="submit" 
                     className="w-full bg-green-600 hover:bg-green-700 text-black font-bold terminal-font"
+                    disabled={loginForm.formState.isSubmitting}
                   >
-                    HACK IN
+                    {loginForm.formState.isSubmitting ? 'LOGGING IN...' : 'HACK IN'}
                   </Button>
                 </form>
               </Form>
@@ -196,7 +215,8 @@ const Auth = () => {
                             <Input
                               {...field}
                               placeholder="John Doe"
-                              className="bg-background border-green-500/30 text-green-300"
+                              className="bg-background border-green-500/30 text-green-300 focus:border-green-400 focus:ring-green-400"
+                              autoComplete="name"
                             />
                           </FormControl>
                           <FormMessage />
@@ -213,7 +233,8 @@ const Auth = () => {
                             <Input
                               {...field}
                               placeholder="hackerman"
-                              className="bg-background border-green-500/30 text-green-300"
+                              className="bg-background border-green-500/30 text-green-300 focus:border-green-400 focus:ring-green-400"
+                              autoComplete="username"
                             />
                           </FormControl>
                           <FormMessage />
@@ -232,7 +253,8 @@ const Auth = () => {
                             {...field}
                             type="email"
                             placeholder="hacker@example.com"
-                            className="bg-background border-green-500/30 text-green-300"
+                            className="bg-background border-green-500/30 text-green-300 focus:border-green-400 focus:ring-green-400"
+                            autoComplete="email"
                           />
                         </FormControl>
                         <FormMessage />
@@ -251,7 +273,8 @@ const Auth = () => {
                               {...field}
                               type={showPassword ? "text" : "password"}
                               placeholder="••••••••"
-                              className="bg-background border-green-500/30 text-green-300 pr-10"
+                              className="bg-background border-green-500/30 text-green-300 pr-10 focus:border-green-400 focus:ring-green-400"
+                              autoComplete="new-password"
                             />
                             <button
                               type="button"
@@ -278,7 +301,8 @@ const Auth = () => {
                               {...field}
                               type={showConfirmPassword ? "text" : "password"}
                               placeholder="••••••••"
-                              className="bg-background border-green-500/30 text-green-300 pr-10"
+                              className="bg-background border-green-500/30 text-green-300 pr-10 focus:border-green-400 focus:ring-green-400"
+                              autoComplete="new-password"
                             />
                             <button
                               type="button"
@@ -296,8 +320,9 @@ const Auth = () => {
                   <Button 
                     type="submit" 
                     className="w-full bg-green-600 hover:bg-green-700 text-black font-bold terminal-font"
+                    disabled={signupForm.formState.isSubmitting}
                   >
-                    CREATE ACCOUNT
+                    {signupForm.formState.isSubmitting ? 'CREATING ACCOUNT...' : 'CREATE ACCOUNT'}
                   </Button>
                 </form>
               </Form>
